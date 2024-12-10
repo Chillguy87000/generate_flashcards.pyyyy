@@ -1,0 +1,51 @@
+from genanki import Deck, Note, Model, Package
+
+# Définir un modèle pour les flashcards Anki
+model = Model(
+    1607392319,
+    "Flashcard Model",
+    fields=[
+        {"name": "Question"},
+        {"name": "Answer"}
+    ],
+    templates=[
+        {
+            "name": "Card 1",
+            "qfmt": "{{Question}}",
+            "afmt": "{{FrontSide}}<hr id='answer'>{{Answer}}",
+        },
+    ],
+)
+
+# Créer un deck pour les flashcards
+deck = Deck(
+    2059400114,
+    "Classes Populaires à l'École"
+)
+
+# Ajouter les cartes au deck
+flashcards = [
+    ("Quelles sont les fonctions principales de l'école selon le document ?", "Structuration des comportements, transmission de valeurs, réduction des inégalités sociales."),
+    ("Quelles sont les trois formes de capital culturel identifiées par Bourdieu ?", "Capital incorporé, capital objectivé, capital certifié."),
+    ("Qu'est-ce que l'habitus selon Bourdieu ?", "L'intériorisation de l'extériorité, un ensemble de dispositions durables inculquées par l'expérience sociale."),
+    ("Quelle est la cause principale des inégalités scolaires selon Bourdieu ?", "L'origine sociale des élèves."),
+    ("Qu'est-ce que la violence symbolique ?", "Une forme de domination douce qui amène les individus à intérioriser leur propre subordination."),
+    ("Qu'est-ce que la massification scolaire ?", "L'augmentation du nombre d'élèves poursuivant des études, sans égalisation des chances."),
+    ("Quelle réforme a fixé l'objectif de 80% d'une génération au baccalauréat ?", "La réforme de 1985."),
+    ("Quelles sont les différences majeures entre démocratisation et massification ?", "La démocratisation vise l'égalité des chances, tandis que la massification augmente simplement les effectifs."),
+    ("Pourquoi les classes populaires sont-elles éloignées de la culture légitime ?", "Leur environnement ne favorise pas l'accès aux codes culturels valorisés par l'école."),
+    ("Qu'est-ce que la hiérarchisation des filières scolaires ?", "Une différenciation implicite entre les filières, valorisant certaines au détriment d'autres."),
+    ("Comment la culture légitime est-elle transmise dans les classes dominantes ?", "De manière naturelle, par l'environnement familial (bibliothèques, théâtre, musique)."),
+    ("Qu'est-ce que l'acculturation des élèves des classes populaires ?", "L'adoption des codes culturels légitimes pour réussir à l'école, au prix d'une distance avec leur milieu d'origine."),
+    ("Qu'est-ce que le Perry School Project ?", "Une expérience américaine visant à réduire les inégalités scolaires avec un programme intensif pour enfants défavorisés.")
+]
+
+for question, answer in flashcards:
+    note = Note(
+        model=model,
+        fields=[question, answer]
+    )
+    deck.add_note(note)
+
+# Sauvegarder le fichier Anki au format APKG
+Package(deck).write_to_file("Classes_Populaires_Ecole.apkg")
